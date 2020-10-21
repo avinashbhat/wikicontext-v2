@@ -1,9 +1,7 @@
-from utils import Utils
+from .utils import Utils
 
 import re
 
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
 import wikipedia
 
 
