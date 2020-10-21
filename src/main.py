@@ -1,9 +1,15 @@
-import streamlit as st 
-import wikipedia
+from subject import Subject
+
+import streamlit as st
+
 st.title('WikiContext')
 
-search_keyword = st.text_input(label="The Wikipedia page that you want summarized.", 
-                    value="Portmanteau")
-if search_keyword:
-    summary = wikipedia.summary(search_keyword)
+subject = st.text_input(label="The Wikipedia page that you want summarized.", 
+                    value="")
+
+if subject:
+    subject = Subject(subject)
+    summary = subject.get_summary()
+    page = subject.get_page_content()
     st.markdown(summary)
+    st.markdown(page)
