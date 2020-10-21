@@ -13,17 +13,11 @@ class Subject(Utils):
         super().__init__(latin_encoder="latin-1")
         self.subject = subject
         self.bs_parser = bs_parser
-        self.url = None
-    
-    def _linkify(self):
-        # A function to create the link in parsable format
-        # wikipedia url is in the form : https://en.wikipedia.org/wiki/Papa_CJ
-        self.url = 'https://en.wikipedia.org/wiki/' + '_'.join(self.subject.split(" "))
+        self.meta = {}
 
     def get_hyperlinks(self):
         # Append the url tag to wiki
-        self._linkify()
-        bs_obj = BeautifulSoup(urlopen(self.url), self.bs_parser)
+        bs_obj = BeautifulSoup(self._get_html, self.bs_parser)
         new_links = list()
         # The url tags are always i) found in bodycontent tag
         for each in bs_obj.findAll("div", {"id": "bodyContent"}):
@@ -35,8 +29,14 @@ class Subject(Utils):
                     newLinks.append(stripped)
         return new_links
 
-    def get_summary(self):
+    def _get_url(self):
+        return wikipedia.page(self.subject).url
+
+    def _get_summary(self):
         return wikipedia.summary(self.subject)
 
-    def get_page_content(self):
+    def _get_content(self):
         return wikipedia.page(self.subject).content
+
+    def _get_html(self):
+        return wikipedia.page(self.subject).html
