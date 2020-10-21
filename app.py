@@ -1,4 +1,4 @@
-from subject import Subject
+from src.subject import Subject
 
 import streamlit as st
 
@@ -9,7 +9,6 @@ subject = st.text_input(label="The Wikipedia page that you want summarized.",
 
 if subject:
     subject = Subject(subject)
-    summary = subject.get_summary()
-    page = subject.get_page_content()
+    summary = subject._get_summary()
     st.markdown(summary)
-    st.markdown(page)
+    # st.markdown(page)
