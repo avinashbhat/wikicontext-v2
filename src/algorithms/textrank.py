@@ -2,13 +2,10 @@ from ..subject import Subject
 
 from gensim.summarization import summarizer
 
+
 class TextRank():
-    def __init__(self, text, ratio=0.2, word_count=None, split=False):
+    def __init__(self, text):
         self.text = text
-        self.ratio = ratio
-        self.word_count = word_count
-        self.split = split
 
     def get_summary(self):
-        return summarizer.summarize(self.text, self.ratio, 
-            self.word_count, self.split)
+        return summarizer.summarize(self.text)
