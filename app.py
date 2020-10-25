@@ -6,7 +6,7 @@ import streamlit as st
 
 st.title('WikiContext')
 
-algorithm = st.selectbox("Algorithm that you want to use.", ["TextRank", "Bart", "T5"], index=0)
+algorithm = st.selectbox("Algorithm that you want to use.", ["TextRank", "BART", "T5"], index=0)
 
 if algorithm == "T5":
     t5_model = st.selectbox("Select a T5 Model.", ["T5 Base", "T5 Small"], index=0)
