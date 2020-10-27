@@ -38,7 +38,7 @@ if subject and algorithm:
     summary = subject._get_summary()
     if algorithm == "TextRank":
         summary = get_textrank_summary(summary)
-    elif algorithm == "Bart":
+    elif algorithm == "BART":
         summary = get_bart_summary(summary)
     elif algorithm == "T5":
         summary = get_t5_summary(summary)
