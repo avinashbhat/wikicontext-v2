@@ -60,6 +60,5 @@ def get_t5_summary(wiki_summary):
     return Transformer(wiki_summary).get_t5_summary(model=t5_model, tokenizer=t5_model, framework="tf",
                                                     min_length=40, max_length=150)
 
-
 if __name__ == "__main__":
     main()
