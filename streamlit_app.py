@@ -15,7 +15,7 @@ prerequisite_dict={
 def main():
     st.sidebar.title('WikiContext')
 
-    algorithm = st.sidebar.selectbox("Algorithm that you want to use.", ["TextRank", "Bart", "T5"], index=0)
+    algorithm = st.sidebar.selectbox("Algorithm that you want to use.", ["TextRank", "BART", "T5"], index=0)
 
     if algorithm == "T5":
         t5_model = st.sidebar.selectbox("Select a T5 Model.", ["T5 Base", "T5 Small"], index=0)
@@ -31,7 +31,7 @@ def main():
         summary = subject._get_summary()
         if algorithm == "TextRank":
             summary = get_textrank_summary(summary)
-        elif algorithm == "Bart":
+        elif algorithm == "BART":
             summary = get_bart_summary(summary)
         elif algorithm == "T5":
             summary = get_t5_summary(summary, t5_model)
