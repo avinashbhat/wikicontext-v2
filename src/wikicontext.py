@@ -1,9 +1,31 @@
-class WikiContext():
-    def __init__(self):
-        pass
+from src.subject import Subject
+from src.algorithms.textrank import TextRank
+from src.algorithms.transformer import Transformer
 
-# The actual process has to be mapped here, now this is done in the app.py file itself
-# 1) Get the data for the subject
-# 2) Get the hyperlinks
-# 3) Get the most relevant keywords (using RAKE or any other algo)
-# 4) Get the summary for the individual hyperlinks
+class WikiContext(Subject):
+    def __init__(self, subject, algorithm, max_prereq=5):
+        Subject.__init__(self, subject=subject)
+        self.algorithm = algorithm
+        self.max_prereq = max_prereq
+
+    def get_main_summary(self):
+        return self._get_summary()
+        # return self._get_content()
+
+    def get_prereq_summary(self):
+        keyphrases = self.get_top_keywords_from_rake()
+        hyperlinks = self._get_links()
+        match = []
+        for phrase in keyphrases:
+            match.extend([hyperlink for hyperlink in hyperlinks if hyperlink.lower() in phrase.lower()])
+            # Make it unique
+            match = list(set(match))
+            if len(match) >= self.max_prereq:
+                break
+        
+        pre_requisites = {}
+        for prereq in match:
+            s = Subject(prereq)
+            pre_requisites[prereq] = s._get_summary()
+        
+        return pre_requisites
