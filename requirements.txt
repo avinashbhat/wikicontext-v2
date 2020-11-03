@@ -135,3 +135,5 @@ widgetsnbextension==3.5.1
 wikipedia==1.4.0
 wrapt==1.12.1
 zipp==3.3.1
+nltk==3.5
+rake-nltk==1.0.4
