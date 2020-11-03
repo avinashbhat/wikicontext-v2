@@ -2,6 +2,7 @@ from src.subject import Subject
 from src.algorithms.textrank import TextRank
 from src.algorithms.transformer import Transformer
 
+
 class WikiContext(Subject):
     def __init__(self, subject, algorithm, params, max_prereq=5):
         Subject.__init__(self, subject=subject)
@@ -40,7 +41,7 @@ class WikiContext(Subject):
 
     def get_main_summary(self):
         model_class = self.mapper()
-        model = model_class(self.content, **self.params)
+        model = model_class(text=self.content, **self.params)
         return model.get_summary(self.algorithm)
 
     def get_prereqs_summary(self):
