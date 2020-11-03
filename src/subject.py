@@ -1,13 +1,15 @@
 from .utils import Utils
+from.rake import Rake
 
 import re
 
 import wikipedia
 
 
-class Subject(Utils):
+class Subject(Utils, Rake):
     def __init__(self, subject, bs_parser="lxml", latin_encoder="latin-1"):
-        super().__init__(latin_encoder="latin-1")
+        Utils.__init__(self, latin_encoder="latin-1")
+        Rake.__init__(self)
         self.subject = subject
         self.bs_parser = bs_parser
         # lazy loaded
@@ -47,3 +49,9 @@ class Subject(Utils):
             self._get_wiki_object()
         self.meta["url"] = self.wikipedia_object.url
         self.meta["title"] = self.wikipedia_object.title
+
+    def get_top_keywords_with_score_from_rake(self):
+        return self.get_keyphrases_with_score(self._get_content()) 
+
+    def get_top_keywords_from_rake(self):
+        return self.get_keyphrases(self._get_content())    
