@@ -11,6 +11,6 @@ class TextRank():
         self.word_count = word_count
         self.split = split
 
-    def get_summary(self):
+    def get_summary(self, algorithm):
         return summarizer.summarize(self.text, self.ratio, 
             self.word_count, self.split)
