@@ -19,7 +19,7 @@ def main():
     st.sidebar.title('WikiContext')
     algorithm = True
     params = {}  # This will hold the hyperparameters for the summarizers
-    algorithm = st.sidebar.selectbox("Algorithm that you want to use.", ["TextRank", "BART", "T5"], index=0)
+    algorithm = st.sidebar.selectbox("Algorithm that you want to use.", ["TextRank", "BART", "T5", "Pegasus"], index=0)
 
     if algorithm == "T5":
         t5_model = st.sidebar.selectbox("Select a T5 Model.", ["T5 Base", "T5 Small"], index=0)
@@ -32,6 +32,9 @@ def main():
     elif algorithm == "BART":
         params['model'] = "facebook/bart-large-cnn"
         params['tokenizer'] = "facebook/bart-large-cnn"
+    elif algorithm == "Pegasus":
+        params['model'] = "google/pegasus-arxiv" # this looks overfit, pls change
+        params['tokenizer'] = "google/pegasus-arxiv"     
 
     subject = st.text_input(label="The Wikipedia page that you want summarized.", value="")
 

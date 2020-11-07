@@ -38,6 +38,8 @@ class WikiContext(Subject):
             return Transformer
         elif self.algorithm == 'T5':
             return Transformer
+        elif self.algorithm == "Pegasus":
+            return Transformer
 
     def get_main_summary(self):
         model_class = self.mapper()

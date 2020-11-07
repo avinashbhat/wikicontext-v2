@@ -33,8 +33,18 @@ class Transformer:
                 max_length=self.max_length)
         return summary[0]['summary_text']
 
+    def _get_pegasus_summary(self):
+        tokenizer = AutoTokenizer.from_pretrained(self.tokenizer)
+        model = AutoModelForSeq2SeqLM.from_pretrained(self.model)
+        pipeline = self._get_pipeline(model, tokenizer)
+        summary = pipeline(self.text, min_length=self.min_length, 
+                max_length=self.max_length)
+        return summary[0]['summary_text']
+
     def get_summary(self, algorithm):
         if algorithm == 'BART':
             return self._get_bart_summary()
         elif algorithm == 'T5':
             return self._get_t5_summary()
+        elif algorithm == "Pegasus":
+            return self._get_pegasus_summary()
