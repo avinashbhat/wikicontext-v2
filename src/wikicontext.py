@@ -13,7 +13,7 @@ class WikiContext(Subject):
         self.prereq = {}
 
     def get_main_content(self):
-        self.content = self._get_content()
+        self.content = self._get_summary()
 
     def get_prereqs_content(self):
         keyphrases = self.get_top_keywords_from_rake()
