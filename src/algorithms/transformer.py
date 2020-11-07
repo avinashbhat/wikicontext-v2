@@ -2,7 +2,7 @@ from transformers import pipeline
 
 
 class Transformer:
-    def __init__(self, text, model='t5-base', tokenizer='t5-base', min_length=40, max_length=150, framework='tf'):
+    def __init__(self, text, model='t5-small', tokenizer='t5-small', min_length=40, max_length=150, framework='tf'):
         self.text = text
         self.model = model
         self.tokenizer = tokenizer
