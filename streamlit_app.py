@@ -29,6 +29,9 @@ def main():
         elif t5_model == "T5 Small":
             params['model'] = "t5-small"
             params['tokenizer'] = "t5-small"
+    elif algorithm == "BART":
+        params['model'] = "facebook/bart-large-cnn"
+        params['tokenizer'] = "facebook/bart-large-cnn"
 
     subject = st.text_input(label="The Wikipedia page that you want summarized.", value="")
 
