@@ -34,11 +34,7 @@ class WikiContext(Subject):
     def mapper(self):
         if self.algorithm == 'TextRank':
             return TextRank
-        elif self.algorithm == 'BART':
-            return Transformer
         elif self.algorithm == 'T5':
-            return Transformer
-        elif self.algorithm == "Pegasus":
             return Transformer
 
     def get_main_summary(self):
