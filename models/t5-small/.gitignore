@@ -1,0 +1,5 @@
+# exclude everything
+t5-small/*
+
+# exception to the rule
+!t5-small/.gitkeep

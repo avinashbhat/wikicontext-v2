@@ -44,6 +44,11 @@ class Subject(Utils, Rake):
             self._get_wiki_object()
         return self.wikipedia_object.html
 
+    def _get_search(self):
+        if not self.wikipedia_object:
+            self._get_wiki_object()
+        return self.wikipedia_object.search
+
     def get_meta(self):
         if not self.wikipedia_object:
             self._get_wiki_object()
@@ -54,4 +59,4 @@ class Subject(Utils, Rake):
         return self.get_keyphrases_with_score(self._get_content()) 
 
     def get_top_keywords_from_rake(self):
-        return self.get_keyphrases(self._get_content())    
+        return self.get_keyphrases(self._get_content())
