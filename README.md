@@ -15,8 +15,10 @@ We are doing some active development on this now, because there is a provision t
 
 [Stable] 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/avinashbhat/wikicontext-v2/wikicontext/)
+
 TextRank Only
 
 [Beta] 
 [GCP](http://34.66.172.110:8001/)
+
 TextRank, T5
