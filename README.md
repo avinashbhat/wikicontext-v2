@@ -12,5 +12,8 @@ WikiContext has two types of searches - linear and recommended. Recommended is, 
 
 ### Contributing
 We are doing some active development on this now, because there is a provision to host the app using streamlit! 
-
+[Stable] TextRank Only
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/avinashbhat/wikicontext-v2/wikicontext/)
+
+[Beta] TextRank, T5
+[![GCP](https://cdn.iconscout.com/icon/free/png-256/google-cloud-platform-2-569356.png)](http://34.66.172.110:8001/)
