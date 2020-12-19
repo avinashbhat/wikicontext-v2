@@ -1,13 +1,11 @@
+import wikipedia
+
 from .utils import Utils
 from.rake import Rake
 
-import re
-
-import wikipedia
-
 
 class Subject(Utils, Rake):
-    def __init__(self, subject, bs_parser="lxml", latin_encoder="latin-1"):
+    def __init__(self, subject, bs_parser="lxml"):
         Utils.__init__(self, latin_encoder="latin-1")
         Rake.__init__(self)
         self.subject = subject
@@ -54,4 +52,4 @@ class Subject(Utils, Rake):
         return self.get_keyphrases_with_score(self._get_content()) 
 
     def get_top_keywords_from_rake(self):
-        return self.get_keyphrases(self._get_content())    
+        return self.get_keyphrases(self._get_content())
