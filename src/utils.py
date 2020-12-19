@@ -1,7 +1,7 @@
 from urllib.parse import unquote
-import streamlit as st
 
-class Utils():
+
+class Utils:
     def __init__(self, latin_encoder="latin-1"):
         self.latin_encoder = latin_encoder
         
