@@ -18,5 +18,5 @@ We are doing some active development on this now, because there is a provision t
 TextRank Only
 
 [Beta] 
-[![GCP](https://storage.googleapis.com/symfoni-prod-gwphosting-no/2019/07/symfoni_next-solutions-google_cloud_platform-logo_horizontal.png =135x15) ](http://34.66.172.110:8001/) 
+[![GCP](https://storage.googleapis.com/symfoni-prod-gwphosting-no/2019/07/symfoni_next-solutions-google_cloud_platform-logo_horizontal.png){:height="135px" width="15px"}](http://34.66.172.110:8001/)
 TextRank, T5
