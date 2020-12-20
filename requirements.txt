@@ -139,5 +139,6 @@ webencodings==0.5.1
 Werkzeug==1.0.1
 widgetsnbextension==3.5.1
 wikipedia==1.4.0
+Wikipedia-API==0.5.4
 wrapt==1.12.1
 zipp==3.3.1
