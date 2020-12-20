@@ -1,14 +1,13 @@
 from src.subject import Subject
 from src.algorithms.textrank import TextRank
-from src.algorithms.transformer import Transformer
 
 
 class WikiContext(Subject):
-    def __init__(self, subject, algorithm, params, max_prereq=5):
+    def __init__(self, subject, algorithm, params, max_prereqs=5):
         Subject.__init__(self, subject=subject)
         self.algorithm = algorithm
         self.params = params
-        self.max_prereq = max_prereq
+        self.max_prereq = max_prereqs
         self.content = None
         self.prereq = {}
 
@@ -19,32 +18,35 @@ class WikiContext(Subject):
         keyphrases = self.get_top_keywords_from_rake()
         hyperlinks = self._get_links()
         match = []
+        count = 0
         for phrase in keyphrases:
-            match.extend([hyperlink for hyperlink in hyperlinks if 
-                hyperlink.lower() in phrase.lower()])
+            match.extend([hyperlink for hyperlink in hyperlinks if hyperlink.lower() in phrase.lower()])
             # Make it unique
             match = list(set(match))
-            if len(match) >= self.max_prereq:
-                break
         
         for prereq in match:
             s = Subject(prereq)
-            self.prereq[prereq] = s._get_summary()
+            if s._check_page_exists:
+                summary = s._get_content()
+                if summary:
+                    self.prereq[prereq] = summary
+                    count += 1
+        
+            if count >= self.max_prereq:
+                break
     
     def mapper(self):
         if self.algorithm == 'TextRank':
             return TextRank
-        elif self.algorithm == 'BART':
-            return Transformer
-        elif self.algorithm == 'T5':
-            return Transformer
-        elif self.algorithm == "Pegasus":
-            return Transformer
 
     def get_main_summary(self):
         model_class = self.mapper()
         model = model_class(text=self.content, **self.params)
-        return model.get_summary(self.algorithm)
+        summary = model.get_summary(self.algorithm)
+        if summary:
+            return summary
+        else:
+            return self.content
 
     def get_prereqs_summary(self):
         model_class = self.mapper()
