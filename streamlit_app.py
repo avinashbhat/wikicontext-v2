@@ -22,7 +22,7 @@ def run_the_app(algorithm, params=None):
     results = []
     if query:
         results = wikipedia.search(query)
-        subject = st.selectbox(label="Choose the Wikipedia page.", options=results, index=0)
+        subject = st.selectbox(label="Choose from disambiguation.", options=results, index=0)
 
         if subject and algorithm:
             wc = WikiContext(subject, algorithm, params)
