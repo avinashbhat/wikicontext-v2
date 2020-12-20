@@ -19,7 +19,7 @@ def run_the_app(algorithm, params=None, max_prereqs=5):
     if params is None:
         params = {}
 
-    query = st.text_input(label="The topic you want summarized.", value="")
+    query = st.text_input(label="The topic you want summarized. For best results, past the exact page title from Wikipedia.", value="")
     results = []
     subject = None
     if query:
