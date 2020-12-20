@@ -14,7 +14,5 @@ class TextRank():
         summary = summarizer.summarize(self.text, self.ratio, self.word_count, self.split)
         if summary and len(summary) > 5:
             return " ".join(summary[:5])
-        elif not summary:
-            return self.text
         else:
             return " ".join(summary)

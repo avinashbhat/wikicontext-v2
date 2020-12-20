@@ -21,21 +21,32 @@ def run_the_app(algorithm, params=None, max_prereqs=5):
 
     query = st.text_input(label="The topic you want summarized.", value="")
     results = []
+    subject = None
     if query:
         results = wikipedia.search(query)
-        subject = st.selectbox(label="Choose from disambiguation.", options=results, index=0)
-
+        if results:
+            subject = results[0]
+        else:
+            st.markdown("No such page found!")
         if subject and algorithm:
             wc = WikiContext(subject, algorithm, params, max_prereqs=max_prereqs)
-            st.title(subject)
-            with st.spinner(text="Generating summary..."):
-                st.markdown(get_main_summary(wc))
-            with st.spinner(text="Generating prerequisites..."):
-                prereqs = get_prereq_summary(wc)
-            st.header("Prerequisites")
-            for subhead in prereqs:
-                st.subheader(subhead)
-                st.write(prereqs[subhead])
+            try:
+                with st.spinner(text="Generating summary..."):
+                    main_summary = get_main_summary(wc)
+                with st.spinner(text="Generating prerequisites..."):
+                    prereqs = get_prereq_summary(wc)
+                st.title(subject)
+                # query = st.selectbox(label="Similar topics.", 
+                #     options=results, index=0)
+                st.markdown(main_summary)
+                st.header("Prerequisites")
+                for subhead in prereqs:
+                    st.subheader(subhead)
+                    st.write(prereqs[subhead])
+            except ValueError as ve:
+                results.remove(subject)
+                query = st.selectbox(label="Please choose from disambiguation.", 
+                    options=results, index=0)
 
 
 @st.cache(show_spinner=False)
