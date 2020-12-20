@@ -29,6 +29,11 @@ class Subject(Utils, Rake):
             self._get_wiki_object()
         return self.wikipedia_object.fullurl
 
+    def _check_page_exists(self):
+        if not self.wikipedia_object:
+            self._get_wiki_object()
+        return self.wikipedia_object.exists()
+        
     def _get_summary(self):
         if not self.wikipedia_object:
             self._get_wiki_object()

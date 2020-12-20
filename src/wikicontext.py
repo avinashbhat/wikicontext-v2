@@ -18,16 +18,22 @@ class WikiContext(Subject):
         keyphrases = self.get_top_keywords_from_rake()
         hyperlinks = self._get_links()
         match = []
+        count = 0
         for phrase in keyphrases:
             match.extend([hyperlink for hyperlink in hyperlinks if hyperlink.lower() in phrase.lower()])
             # Make it unique
             match = list(set(match))
-            if len(match) >= self.max_prereq:
-                break
         
         for prereq in match:
             s = Subject(prereq)
-            self.prereq[prereq] = s._get_summary()
+            if s._check_page_exists:
+                summary = s._get_content()
+                if summary:
+                    self.prereq[prereq] = summary
+                    count += 1
+        
+            if count >= self.max_prereq:
+                break
     
     def mapper(self):
         if self.algorithm == 'TextRank':
