@@ -3,11 +3,11 @@ from src.algorithms.textrank import TextRank
 
 
 class WikiContext(Subject):
-    def __init__(self, subject, algorithm, params, max_prereq=5):
+    def __init__(self, subject, algorithm, params, max_prereqs=5):
         Subject.__init__(self, subject=subject)
         self.algorithm = algorithm
         self.params = params
-        self.max_prereq = max_prereq
+        self.max_prereq = max_prereqs
         self.content = None
         self.prereq = {}
 
@@ -42,7 +42,11 @@ class WikiContext(Subject):
     def get_main_summary(self):
         model_class = self.mapper()
         model = model_class(text=self.content, **self.params)
-        return model.get_summary(self.algorithm)
+        summary = model.get_summary(self.algorithm)
+        if summary:
+            return summary
+        else:
+            return self.content
 
     def get_prereqs_summary(self):
         model_class = self.mapper()
