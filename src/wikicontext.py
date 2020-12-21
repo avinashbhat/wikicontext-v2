@@ -24,7 +24,7 @@ class WikiContext(Subject):
             # Make it unique
             match = list(set(match))
         
-        for prereq in match:
+        for prereq in match[:self.max_prereq]:
             s = Subject(prereq)
             if s._check_page_exists:
                 summary = s._get_content()
@@ -51,7 +51,15 @@ class WikiContext(Subject):
     def get_prereqs_summary(self):
         model_class = self.mapper()
         prereq_summary = {}
+        count = 0
         for each in self.prereq:
-            model = model_class(self.prereq[each], **self.params)
-            prereq_summary[each] = model.get_summary(self.algorithm)
+            try:
+                if count >= self.max_prereq:
+                    break
+                model = model_class(self.prereq[each], **self.params)
+                prereq_summary[each] = model.get_summary(self.algorithm)
+                count += 1
+            except ValueError:
+                continue
+
         return prereq_summary
