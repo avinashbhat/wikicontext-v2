@@ -104,6 +104,29 @@ const Utils = {
         return text
             // Remove reference markers like [1], [2], etc.
             .replace(/\[\d+\]/g, '')
+            // Remove LaTeX display style blocks - more aggressive pattern
+            .replace(/\{\\displaystyle[\s\S]*?\}/g, ' ')
+            // Remove specific LaTeX environments
+            .replace(/\\begin\{[^}]+\}[\s\S]*?\\end\{[^}]+\}/g, ' ')
+            // Remove LaTeX commands with arguments
+            .replace(/\\[a-zA-Z]+\{[^}]*\}/g, ' ')
+            // Remove standalone LaTeX commands
+            .replace(/\\[a-zA-Z]+/g, ' ')
+            // Remove backslashes followed by special chars
+            .replace(/\\[&\\\|]/g, ' ')
+            // Remove remaining curly braces
+            .replace(/[{}]/g, '')
+            // Remove angle bracket notation (quantum states)
+            .replace(/\s*[⟨⟩]\s*/g, ' ')
+            // Clean up mathematical notation
+            .replace(/\s*:=\s*/g, ' = ')
+            .replace(/\^\d+=/g, '')
+            // Remove caret symbols (exponents) when isolated
+            .replace(/\s*\^\s*/g, '')
+            // Remove parentheses with only numbers/spaces (matrix notation)
+            .replace(/\(\s*[\d\s]+\s*\)/g, ' ')
+            // Clean up semicolons used in math notation
+            .replace(/\s*;\s*/g, '. ')
             // Remove multiple spaces
             .replace(/\s+/g, ' ')
             // Remove leading/trailing whitespace
