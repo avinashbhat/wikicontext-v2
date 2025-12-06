@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WikiContext - Simplify Wikipedia Articles</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 WikiContext</h1>
+            <p class="subtitle">Simplify Wikipedia articles with AI-powered summaries</p>
+        </header>
+
+        <div class="disclaimer">
+            <p><strong>Note:</strong> This tool uses client-side JavaScript for text summarization.
+            Results may differ from the Python version due to algorithm limitations in the browser.</p>
+        </div>
+
+        <div class="input-section">
+            <div class="search-box">
+                <input
+                    type="text"
+                    id="topicInput"
+                    placeholder="Enter a Wikipedia topic (e.g., Quantum Computing)"
+                    autocomplete="off"
+                >
+                <button id="searchBtn" onclick="handleSearch()">Search</button>
+            </div>
+
+            <div class="settings">
+                <label for="maxPrereqs">
+                    Max Prerequisites: <span id="prereqValue">5</span>
+                </label>
+                <input
+                    type="range"
+                    id="maxPrereqs"
+                    min="2"
+                    max="10"
+                    value="5"
+                    oninput="updatePrereqValue(this.value)"
+                >
+            </div>
+
+            <div class="settings">
+                <label for="summaryRatio">
+                    Summary Length: <span id="ratioValue">20%</span>
+                </label>
+                <input
+                    type="range"
+                    id="summaryRatio"
+                    min="10"
+                    max="50"
+                    value="20"
+                    step="5"
+                    oninput="updateRatioValue(this.value)"
+                >
+            </div>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Processing article...</p>
+        </div>
+
+        <div id="error" class="error" style="display: none;"></div>
+
+        <div id="disambiguationSection" style="display: none;">
+            <h3>Multiple articles found. Please select one:</h3>
+            <div id="disambiguationOptions"></div>
+        </div>
+
+        <div id="results" style="display: none;">
+            <section class="main-summary">
+                <h2 id="articleTitle"></h2>
+                <div class="summary-content" id="mainSummary"></div>
+                <a id="wikiLink" href="#" target="_blank" class="wiki-link">View on Wikipedia →</a>
+            </section>
+
+            <section class="prerequisites">
+                <h2>📖 Prerequisites</h2>
+                <p class="prereq-description">Key concepts to understand this article:</p>
+                <div id="prereqList"></div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <p>Made with ❤️ using JavaScript | <a href="https://github.com/yourusername/wikicontext-v2" target="_blank">View on GitHub</a></p>
+    </footer>
+
+    <script src="utils.js"></script>
+    <script src="rake.js"></script>
+    <script src="textrank.js"></script>
+    <script src="wikipedia-api.js"></script>
+    <script src="wikicontext.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
